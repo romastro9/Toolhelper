@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Rom Creative Toolkit — private, fast browser tools for graphic designers and video editors." />
+  <meta name="theme-color" content="#f5f5f7" />
+  <title>Rom Creative Toolkit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Kantumruy+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+  <div class="noise-layer" aria-hidden="true"></div>
+
+  <div class="app-shell">
+    <aside class="sidebar glass">
+      <div class="brand">
+        <div class="brand-mark" aria-label="Rom Creative">R</div>
+        <div>
+          <strong>Rom Creative</strong>
+          <span data-i18n="toolkit">Toolkit</span>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Main navigation">
+        <button class="nav-item active" data-filter="all"><span>⌂</span><b data-i18n="dashboard">Dashboard</b></button>
+        <button class="nav-item" data-filter="image"><span>◫</span><b data-i18n="imageTools">Image Tools</b></button>
+        <button class="nav-item" data-filter="video"><span>▶</span><b data-i18n="videoTools">Video Tools</b></button>
+        <button class="nav-item" data-filter="audio"><span>♫</span><b data-i18n="audioTools">Audio Tools</b></button>
+        <button class="nav-item" data-filter="file"><span>▤</span><b data-i18n="fileTools">File & PDF</b></button>
+        <button class="nav-item" data-filter="design"><span>✦</span><b data-i18n="designHelpers">Design Helpers</b></button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button id="themeToggle" class="small-action" title="Toggle theme">☾ <span data-i18n="theme">Theme</span></button>
+        <button id="languageToggle" class="small-action">KH / EN</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button id="mobileMenu" class="icon-button mobile-only" aria-label="Open menu">☰</button>
+        <div class="privacy-chip"><span class="privacy-dot"></span><span data-i18n="localOnly">Local only</span></div>
+        <div class="search-wrap glass">
+          <span>⌕</span>
+          <input id="toolSearch" type="search" placeholder="Search tools..." data-i18n-placeholder="searchTools" />
+          <kbd>Ctrl K</kbd>
+        </div>
+        <button id="favoritesOnly" class="icon-button glass" title="Show favorites">☆</button>
+      </header>
+
+      <section class="hero glass">
+        <div>
+          <span class="eyebrow" data-i18n="creativeWorkspace">YOUR CREATIVE WORKSPACE</span>
+          <div class="hero-badge">Designed for creators · No upload required</div>
+          <h1 data-i18n="heroTitle">Finish design and video tasks faster.</h1>
+          <p data-i18n="heroText">Convert, resize, compress and prepare files directly in your browser. Your files stay on your device.</p>
+          <div class="hero-actions">
+            <button class="primary-btn" data-open-tool="image-converter" data-i18n="startConverting">Start converting</button>
+            <button class="secondary-btn" id="browseTools" data-i18n="browseTools">Browse tools</button>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="floating-card card-a"><span>PNG</span><b>→ WEBP</b></div>
+          <div class="floating-card card-b"><span>MP4</span><b>→ MP3</b></div>
+          <div class="floating-card card-c"><span>12.8 MB</span><b>→ 3.1 MB</b></div>
+          <div class="hero-orb"><span>R</span></div>
+        </div>
+      </section>
+
+      <section class="stats-grid">
+        <article class="stat-card glass"><span data-i18n="availableTools">Available tools</span><strong id="toolCount">12</strong></article>
+        <article class="stat-card glass"><span data-i18n="processedToday">Processed this session</span><strong id="processedCount">0</strong></article>
+        <article class="stat-card glass"><span data-i18n="privacy">Privacy</span><strong data-i18n="localOnly">Local only</strong></article>
+      </section>
+
+      <section id="toolsSection" class="section-block">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" data-i18n="quickAccess">QUICK ACCESS</span>
+            <h2 data-i18n="allTools">All creative tools</h2>
+          </div>
+          <div class="category-pills" id="categoryPills">
+            <button class="pill active" data-filter="all" data-i18n="all">All</button>
+            <button class="pill" data-filter="image" data-i18n="images">Images</button>
+            <button class="pill" data-filter="video" data-i18n="video">Video</button>
+            <button class="pill" data-filter="audio" data-i18n="audio">Audio</button>
+            <button class="pill" data-filter="file" data-i18n="files">Files</button>
+            <button class="pill" data-filter="design" data-i18n="design">Design</button>
+          </div>
+        </div>
+
+        <div id="toolsGrid" class="tools-grid">
+          <article class="tool-card glass" data-category="image" data-name="image converter jpg png webp" data-tool="image-converter">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon cyan">⇄</div>
+            <h3 data-i18n="imageConverter">Image Converter</h3><p data-i18n="imageConverterDesc">Convert JPG, PNG and WEBP files.</p><span class="tool-tag">IMAGE</span>
+          </article>
+          <article class="tool-card glass" data-category="image" data-name="image compressor compress photo" data-tool="image-compressor">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon violet">⇣</div>
+            <h3 data-i18n="imageCompressor">Image Compressor</h3><p data-i18n="imageCompressorDesc">Reduce image size with quality control.</p><span class="tool-tag">IMAGE</span>
+          </article>
+          <article class="tool-card glass" data-category="image" data-name="image resizer resize crop social media" data-tool="image-resizer">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon pink">↗</div>
+            <h3 data-i18n="imageResizer">Resize & Crop</h3><p data-i18n="imageResizerDesc">Resize for Facebook, TikTok and print.</p><span class="tool-tag">IMAGE</span>
+          </article>
+          <article class="tool-card glass" data-category="video audio" data-name="video to mp3 audio extractor mp4 mp3" data-tool="video-mp3">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon orange">♫</div>
+            <h3 data-i18n="videoToMp3">Video to MP3</h3><p data-i18n="videoToMp3Desc">Extract MP3 audio from a video.</p><span class="tool-tag">VIDEO</span>
+          </article>
+          <article class="tool-card glass" data-category="file" data-name="zip file compressor archive multiple files" data-tool="zip-compressor">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon lime">ZIP</div>
+            <h3 data-i18n="fileCompressor">File Compressor</h3><p data-i18n="fileCompressorDesc">Pack multiple files into one ZIP.</p><span class="tool-tag">FILE</span>
+          </article>
+          <article class="tool-card glass" data-category="file image" data-name="image to pdf jpg png pdf" data-tool="image-pdf">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon red">PDF</div>
+            <h3 data-i18n="imageToPdf">Image to PDF</h3><p data-i18n="imageToPdfDesc">Create a PDF from one or more images.</p><span class="tool-tag">PDF</span>
+          </article>
+          <article class="tool-card glass" data-category="design" data-name="social media size preset facebook instagram tiktok youtube" data-tool="size-presets">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon blue">▣</div>
+            <h3 data-i18n="sizePresets">Social Size Presets</h3><p data-i18n="sizePresetsDesc">Copy common design dimensions instantly.</p><span class="tool-tag">DESIGN</span>
+          </article>
+          <article class="tool-card glass" data-category="design" data-name="color palette extractor hex colors image" data-tool="palette-extractor">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon palette">◉</div>
+            <h3 data-i18n="paletteExtractor">Color Palette</h3><p data-i18n="paletteExtractorDesc">Extract useful colors from an image.</p><span class="tool-tag">DESIGN</span>
+          </article>
+          <article class="tool-card glass" data-category="design" data-name="qr code generator url text" data-tool="qr-generator">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon monochrome">▦</div>
+            <h3 data-i18n="qrGenerator">QR Code Generator</h3><p data-i18n="qrGeneratorDesc">Create a downloadable QR code.</p><span class="tool-tag">DESIGN</span>
+          </article>
+          <article class="tool-card glass coming" data-category="video" data-name="video compressor mp4 smaller file" data-tool="coming-soon">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon cyan">▶</div>
+            <h3 data-i18n="videoCompressor">Video Compressor</h3><p data-i18n="comingSoonDesc">Planned for the next version.</p><span class="tool-tag" data-i18n="comingSoon">SOON</span>
+          </article>
+          <article class="tool-card glass coming" data-category="video" data-name="trim merge video cutter" data-tool="coming-soon">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon violet">✂</div>
+            <h3 data-i18n="trimMerge">Trim & Merge Video</h3><p data-i18n="comingSoonDesc">Planned for the next version.</p><span class="tool-tag" data-i18n="comingSoon">SOON</span>
+          </article>
+          <article class="tool-card glass coming" data-category="audio" data-name="audio noise remover cleanup voice" data-tool="coming-soon">
+            <button class="favorite-btn" aria-label="Favorite">☆</button><div class="tool-icon orange">≈</div>
+            <h3 data-i18n="noiseRemover">Noise Remover</h3><p data-i18n="comingSoonDesc">Planned for the next version.</p><span class="tool-tag" data-i18n="comingSoon">SOON</span>
+          </article>
+        </div>
+        <div id="emptyState" class="empty-state glass hidden" data-i18n="noTools">No matching tools found.</div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading"><div><span class="eyebrow" data-i18n="activity">ACTIVITY</span><h2 data-i18n="recentHistory">Recent history</h2></div><button id="clearHistory" class="text-button" data-i18n="clear">Clear</button></div>
+        <div id="historyList" class="history-list glass"><p class="muted" data-i18n="noHistory">No files processed yet.</p></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-panel glass">
+      <button class="modal-close" data-close-modal aria-label="Close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer"><span>Rom Creative Toolkit</span><span>Private browser tools for faster creative work.</span></footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="app-core.js"></script>
+  <script src="app-image.js"></script>
+  <script src="app-tools.js"></script>
+  <script src="app-init.js"></script>
+</body>
+</html>
